@@ -1,0 +1,19 @@
+apiVersion: llamastack.io/v1alpha1
+kind: LlamaStackDistribution
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  name: llamastack
+spec:
+  replicas: 1
+  server:
+    containerSpec:
+      env:
+        - name: OTEL_SERVICE_NAME
+          value: llamastack
+      name: llama-stack
+      port: 8321
+    distribution:
+      name: remote-vllm
+    userConfig:
+      configMapName: llama-stack-config

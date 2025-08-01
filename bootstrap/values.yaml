@@ -24,7 +24,7 @@ llmaas:
   path: model-serving
 
 slackMcpSecret:
-  namespace: llama-serve
+  namespace: lls-demo
   name: slack-secret
   path: mcp_servers
   slackBotToken: secret
@@ -32,8 +32,8 @@ slackMcpSecret:
   graniteToken: secret
   llamaToken: secret
 
-llama:
-  repoURL: https://github.com/rhpds/private-maas-llama-stack-on-ocp.git
+llamaStack:
+  repoURL: https://github.com/redhat-gpte-devopsautomation/private-llm-aas
   targetRevision: main
-  path: kubernetes/kustomize/overlay/demo
-  namespace: llama-serve
+  path: llama-stack
+  namespace: lls-demo
