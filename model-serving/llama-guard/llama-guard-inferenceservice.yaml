@@ -32,5 +32,5 @@ spec:
     tolerations:
       - effect: NoSchedule
         key: nvidia.com/gpu
-        value: "l4-gpu"
-        operator: Equal
+        value: true
+        operator: Exists
