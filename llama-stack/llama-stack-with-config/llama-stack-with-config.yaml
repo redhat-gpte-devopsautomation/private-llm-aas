@@ -12,7 +12,7 @@ spec:
     containerSpec:
       env:
         - name: GRANITE_VLLM
-          value: 'http://granite-3dot2-8b-instruct-predictor.llm-hosting.svc.cluster.local:8080/v1'
+          value: 'https://granite-3-2-8b-instruct-predictor-maas-apicast-production.apps.maas.redhatworkshops.io:443/v1'
         - name: GRANITE_TOKEN
           value: openshift
       name: llama-stack
