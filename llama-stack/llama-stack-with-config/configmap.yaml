@@ -23,7 +23,7 @@ data:
       - provider_id: vllm
         provider_type: remote::vllm
         config:
-          url: ${env.GRANITE_URL:http://granite-3dot2-8b-instruct-predictor.llm-hosting.svc.cluster.local:8080/v1}
+          url: ${env.GRANITE_URL:https://granite-3-2-8b-instruct-predictor-maas-apicast-production.apps.maas.redhatworkshops.io:443/v1}
           tls_verify: false
           api_token: ${env.GRANITE_TOKEN:fake}
           #max_tokens: 12000
@@ -34,7 +34,7 @@ data:
       - provider_id: vllm-safety
         provider_type: remote::vllm
         config:
-          url: ${env.SAFETY_MODEL:http://llama-guard-3-1b-predictor.llm-hosting.svc.cluster.local:8080/v1}
+          url: ${env.SAFETY_MODEL:https://llama-guard-3-1b-maas-apicast-production.apps.maas.redhatworkshops.io:443/v1}
           max_tokens: ${env.VLLM_MAX_TOKENS:4096}
           api_token: ${env.VLLM_API_TOKEN:fake}
           tls_verify: ${env.VLLM_TLS_VERIFY:false}
@@ -119,9 +119,9 @@ data:
       db_path: ${env.SQLITE_STORE_DIR:~/.llama/distributions/remote-vllm}/registry.db
     models:
     - metadata: {}
-      model_id: granite-3dot2-8b-instruct
+      model_id: granite-3-2-8b-instruct
       provider_id: vllm
-      provider_model_id: granite-3dot2-8b-instruct
+      provider_model_id: granite-3-2-8b-instruct
       model_type: llm
     - metadata:
         embedding_dimension: 384
@@ -129,8 +129,9 @@ data:
       provider_id: sentence-transformers
       model_type: embedding
     - metadata: {}
-      model_id: ${env.SAFETY_MODEL:meta-llama/Llama-Guard-3-1B}
-      #provider_model_id: ${env.SAFETY_MODEL:llama-guard-3-1b}
+      model_id: ${env.SAFETY_MODEL:llama-guard-3-1b}
+#      model_id: ${env.SAFETY_MODEL:meta-llama/Llama-Guard-3-1B}
+      provider_model_id: ${env.SAFETY_MODEL:llama-guard-3-1b}
       provider_id: vllm-safety
       model_type: llm
     datasets: []
@@ -138,7 +139,8 @@ data:
     scoring_fns: []
     benchmarks: []
     shields:
-    - shield_id: ${env.SAFETY_MODEL:meta-llama/Llama-Guard-3-1B}
+    - shield_id: ${env.SAFETY_MODEL:llama-guard-3-1b}
+#    - shield_id: ${env.SAFETY_MODEL:meta-llama/Llama-Guard-3-1B}   
     tool_groups:
     - provider_id: tavily-search
       toolgroup_id: builtin::websearch
