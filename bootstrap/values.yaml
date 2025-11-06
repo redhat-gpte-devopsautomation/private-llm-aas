@@ -12,7 +12,7 @@ deployer:
 
 workspace:
   git:
-    url: https://github.com/redhat-gpte-devopsautomation/private-llm-aas
+    url: https://github.com/rhpds/private-llmaas-multitenant
     revision: main
     path: workspace
   devworkspace:
@@ -34,12 +34,12 @@ threeScale:
   startingCSV: 3scale-operator.v0.12.3
 
 cmsUpload:
-  repoURL: https://github.com/redhat-gpte-devopsautomation/private-llm-aas
+  repoURL: https://github.com/rhpds/private-llmaas-multitenant
   targetRevision: main
   path: 3scale/cms-upload
 
 llmaas:
-  repoURL: https://github.com/redhat-gpte-devopsautomation/private-llm-aas
+  repoURL: https://github.com/rhpds/private-llmaas-multitenant
   targetRevision: main
   path: model-serving
 
@@ -53,7 +53,7 @@ slackMcpSecret:
   llamaToken: secret
 
 llamaStack:
-  repoURL: https://github.com/redhat-gpte-devopsautomation/private-llm-aas
+  repoURL: https://github.com/rhpds/private-llmaas-multitenant
   targetRevision: main
   path: llama-stack
   namespace: lls-demo
