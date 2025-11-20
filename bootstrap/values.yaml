@@ -38,10 +38,10 @@ workspace:
 #  targetRevision: main
 #  path: 3scale/cms-upload
 
-#llmaas:
-#  repoURL: https://github.com/rhpds/private-llmaas-multitenant
-#  targetRevision: main
-#  path: model-serving
+llmaas:
+  repoURL: https://github.com/rhpds/private-llmaas-multitenant
+  targetRevision: main
+  path: model-serving
 
 slackMcpSecret:
   namespace: lls-demo
