@@ -25,23 +25,23 @@ workspace:
           image: registry.redhat.io/devspaces/udi-rhel9:latest
           sourceMapping: /projects
 
-threeScale:
-  namespace: 3scale
-  repoURL: https://github.com/rhpds/ocp-cluster-addons
-  targetRevision: main
-  path: 3scale
-  channel: threescale-2.15
-  startingCSV: 3scale-operator.v0.12.3
+#threeScale:
+#  namespace: 3scale
+#  repoURL: https://github.com/rhpds/ocp-cluster-addons
+#  targetRevision: main
+#  path: 3scale
+#  channel: threescale-2.15
+#  startingCSV: 3scale-operator.v0.12.3
 
-cmsUpload:
-  repoURL: https://github.com/rhpds/private-llmaas-multitenant
-  targetRevision: main
-  path: 3scale/cms-upload
+#cmsUpload:
+#  repoURL: https://github.com/rhpds/private-llmaas-multitenant
+#  targetRevision: main
+#  path: 3scale/cms-upload
 
-llmaas:
-  repoURL: https://github.com/rhpds/private-llmaas-multitenant
-  targetRevision: main
-  path: model-serving
+#llmaas:
+#  repoURL: https://github.com/rhpds/private-llmaas-multitenant
+#  targetRevision: main
+#  path: model-serving
 
 slackMcpSecret:
   namespace: lls-demo
