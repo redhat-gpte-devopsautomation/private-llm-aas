@@ -21,10 +21,10 @@ resources:
 - nvidia-gpu-monitoring-dashboard-job.yaml
 #- anythingllm-connection-type-configmap.yaml
 - images-puller.yaml
-- 3scale-network-policy.yaml
+#- 3scale-network-policy.yaml
 # wave 2
 #- granite-inference-raw-2-22.yaml
-- granite-8b/
+#- granite-8b/
 #- granite-inference-raw.yaml
 #- granite-8b/inferenceservice.yaml
-- llama-guard/
+#- llama-guard/
