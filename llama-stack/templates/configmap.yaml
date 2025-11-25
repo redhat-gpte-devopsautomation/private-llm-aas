@@ -130,7 +130,6 @@ data:
       model_type: embedding
     - metadata: {}
       model_id: "${env.SAFETY_MODEL:{{ .Values.llamaguard.modelName }}}"
-#      model_id: ${env.SAFETY_MODEL:meta-llama/Llama-Guard-3-1B}
       provider_model_id: "${env.SAFETY_MODEL:{{ .Values.llamaguard.modelName }}}"
       provider_id: vllm-safety
       model_type: llm
@@ -140,7 +139,6 @@ data:
     benchmarks: []
     shields:
     - shield_id: "${env.SAFETY_MODEL:{{ .Values.llamaguard.modelName }}}"
-#    - shield_id: ${env.SAFETY_MODEL:meta-llama/Llama-Guard-3-1B}   
     tool_groups:
     - provider_id: tavily-search
       toolgroup_id: builtin::websearch
