@@ -11,10 +11,14 @@ spec:
   server:
     containerSpec:
       env:
-        - name: GRANITE_VLLM
-          value: 'https://granite-3-2-8b-instruct-predictor-maas-apicast-production.apps.maas.redhatworkshops.io:443/v1'
+        - name: GRANITE_URL
+          value: '{{ .Values.granite.endpoint }}'
         - name: GRANITE_TOKEN
-          value: openshift
+          value: '{{ .Values.granite.apiToken }}'
+        - name: SAFETY_MODEL
+          value: '{{ .Values.llamaguard.endpoint }}'
+        - name: VLLM_API_TOKEN
+          value: '{{ .Values.llamaguard.apiToken }}'
       name: llama-stack
       port: 8321
     distribution:

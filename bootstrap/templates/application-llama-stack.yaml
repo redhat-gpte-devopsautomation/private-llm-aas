@@ -10,6 +10,17 @@ spec:
     repoURL: {{ .Values.llamaStack.repoURL }}
     targetRevision: {{ .Values.llamaStack.targetRevision}}
     path: {{ .Values.llamaStack.path }}
+    helm:
+      values: |
+        granite:
+          modelName: {{ .Values.llamaStack.granite.modelName }}
+          endpoint: {{ .Values.llamaStack.granite.endpoint }}
+          apiToken: {{ .Values.llamaStack.granite.apiToken }}
+        llamaguard:
+          modelName: {{ .Values.llamaStack.llamaguard.modelName }}
+          endpoint: {{ .Values.llamaStack.llamaguard.endpoint }}
+          apiToken: {{ .Values.llamaStack.llamaguard.apiToken }}
+        namespace: {{ .Values.llamaStack.namespace }}
   destination:
     server: https://kubernetes.default.svc
     namespace: {{ .Values.llamaStack.namespace}}

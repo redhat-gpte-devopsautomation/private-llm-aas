@@ -22,26 +22,8 @@ workspace:
     components:
       - name: tooling
         container:
-          image: registry.redhat.io/devspaces/udi-rhel9:latest
+          image: registry.redhat.io/devspaces/ubi-rhel9:latest
           sourceMapping: /projects
-
-#threeScale:
-#  namespace: 3scale
-#  repoURL: https://github.com/rhpds/ocp-cluster-addons
-#  targetRevision: main
-#  path: 3scale
-#  channel: threescale-2.15
-#  startingCSV: 3scale-operator.v0.12.3
-
-#cmsUpload:
-#  repoURL: https://github.com/rhpds/private-llmaas-multitenant
-#  targetRevision: main
-#  path: 3scale/cms-upload
-
-#llmaas:
-#  repoURL: https://github.com/rhpds/private-llmaas-multitenant
-#  targetRevision: main
-#  path: model-serving
 
 slackMcpSecret:
   namespace: lls-demo
@@ -57,3 +39,11 @@ llamaStack:
   targetRevision: main
   path: llama-stack
   namespace: lls-demo
+  granite:
+    modelName: granite-3dot2-8b-instruct
+    endpoint: ""
+    apiToken: ""
+  llamaguard:
+    modelName: llama-guard-3-1b
+    endpoint: ""
+    apiToken: ""
