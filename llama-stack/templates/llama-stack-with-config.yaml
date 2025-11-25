@@ -22,6 +22,6 @@ spec:
       name: llama-stack
       port: 8321
     distribution:
-      name: vllm
+      name: custom
     configFile:
       configMapName: llama-stack-config
