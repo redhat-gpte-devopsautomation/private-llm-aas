@@ -5,10 +5,12 @@ granite:
   modelName: granite-3dot2-8b-instruct
   endpoint: ""
   apiToken: ""
+  tlsverify: true
 
 llamaguard:
   modelName: llama-guard-3-1b
   endpoint: ""
   apiToken: ""
+  tlsverify: true
 
 namespace: lls-demo
