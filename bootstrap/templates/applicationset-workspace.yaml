@@ -15,7 +15,7 @@ spec:
 {{- end }}
   template:
     metadata:
-      name: workspace-{{- "{{" }} user {{- " }}" }}
+      name: workspace-{% raw %}{{ user }}{% endraw %}
       namespace: openshift-gitops
     spec:
       project: default
@@ -25,7 +25,7 @@ spec:
         path: {{ .Values.workspace.git.path }}
         helm:
           values: |
-            username: '{{- "{{" }} user {{- " }}" }}'
+            username: '{% raw %}{{ user }}{% endraw %}'
             devworkspace:
               {{- toYaml .Values.workspace.devworkspace | nindent 14 }}
       destination:
