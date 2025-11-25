@@ -57,3 +57,11 @@ llamaStack:
   targetRevision: main
   path: llama-stack
   namespace: lls-demo
+  granite:
+    modelName: granite-3dot2-8b-instruct
+    endpoint: ""
+    apiToken: ""
+  llamaguard:
+    modelName: llama-guard-3-1b
+    endpoint: ""
+    apiToken: ""
