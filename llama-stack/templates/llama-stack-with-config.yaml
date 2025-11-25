@@ -22,6 +22,6 @@ spec:
       name: llama-stack
       port: 8321
     distribution:
-      image: ghcr.io/meta-llama/distribution-remote-vllm:latest
+      image: llamastack/distribution-remote-vllm:latest
     userConfig:
       configMapName: llama-stack-config
