@@ -119,9 +119,9 @@ data:
       db_path: ${env.SQLITE_STORE_DIR:~/.llama/distributions/remote-vllm}/registry.db
     models:
     - metadata: {}
-      model_id: {{ .Values.granite.modelName }}
+      model_id: "{{ .Values.granite.modelName }}"
       provider_id: vllm
-      provider_model_id: {{ .Values.granite.modelName }}
+      provider_model_id: "{{ .Values.granite.modelName }}"
       model_type: llm
     - metadata:
         embedding_dimension: 384
@@ -129,9 +129,9 @@ data:
       provider_id: sentence-transformers
       model_type: embedding
     - metadata: {}
-      model_id: ${env.SAFETY_MODEL:{{ .Values.llamaguard.modelName }}}
+      model_id: "${env.SAFETY_MODEL:{{ .Values.llamaguard.modelName }}}"
 #      model_id: ${env.SAFETY_MODEL:meta-llama/Llama-Guard-3-1B}
-      provider_model_id: ${env.SAFETY_MODEL:{{ .Values.llamaguard.modelName }}}
+      provider_model_id: "${env.SAFETY_MODEL:{{ .Values.llamaguard.modelName }}}"
       provider_id: vllm-safety
       model_type: llm
     datasets: []
@@ -139,7 +139,7 @@ data:
     scoring_fns: []
     benchmarks: []
     shields:
-    - shield_id: ${env.SAFETY_MODEL:{{ .Values.llamaguard.modelName }}}
+    - shield_id: "${env.SAFETY_MODEL:{{ .Values.llamaguard.modelName }}}"
 #    - shield_id: ${env.SAFETY_MODEL:meta-llama/Llama-Guard-3-1B}   
     tool_groups:
     - provider_id: tavily-search
