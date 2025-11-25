@@ -28,7 +28,12 @@ spec:
         capabilities:
           drop:
             - ALL
+    podOverrides:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
     distribution:
-      image: llamastack/distribution-remote-vllm:latest
+      name: rh-dev
     userConfig:
       configMapName: llama-stack-config
