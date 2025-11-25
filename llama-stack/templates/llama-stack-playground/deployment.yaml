@@ -44,7 +44,7 @@ spec:
             - name: LLAMA_STACK_ENDPOINT
               value: "http://llamastack-service:8321"
             - name: DEFAULT_MODEL
-              value: "llama32-3b"
+              value: "{{ .Values.granite.modelName }}"
           livenessProbe:
             failureThreshold: 3
             httpGet:
