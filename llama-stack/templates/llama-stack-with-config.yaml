@@ -21,5 +21,7 @@ spec:
           value: '{{ .Values.llamaguard.apiToken }}'
       name: llama-stack
       port: 8321
+    distribution:
+      name: vllm
     configFile:
       configMapName: llama-stack-config
