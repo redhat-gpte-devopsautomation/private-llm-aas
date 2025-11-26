@@ -21,11 +21,6 @@ spec:
           value: '{{ .Values.llamaguard.apiToken }}'
       name: llama-stack
       port: 8321
-      securityContext:
-        allowPrivilegeEscalation: false
-        capabilities:
-          drop:
-            - ALL
     distribution:
       image: docker.io/llamastack/distribution-remote-vllm:latest
     userConfig:
