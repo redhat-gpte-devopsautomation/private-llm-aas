@@ -81,6 +81,7 @@ data:
       - provider_id: localfs
         provider_type: inline::localfs
         config:
+          storage_dir: /tmp/llama-stack/files
           kvstore:
             type: sqlite
             db_path: /tmp/llama-stack/files_store.db
