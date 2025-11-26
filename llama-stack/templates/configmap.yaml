@@ -82,9 +82,9 @@ data:
         provider_type: inline::localfs
         config:
           storage_dir: /tmp/llama-stack/files
-          kvstore:
+          metadata_store:
             type: sqlite
-            db_path: /tmp/llama-stack/files_store.db
+            db_path: /tmp/llama-stack/files_metadata.db
       safety:
       - provider_id: llama-guard
         provider_type: inline::llama-guard
