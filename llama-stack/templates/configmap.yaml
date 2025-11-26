@@ -19,7 +19,6 @@ data:
     - vector_io
     - telemetry
     - files
-    - prompts
     providers:
       inference:
       - provider_id: vllm
@@ -86,13 +85,6 @@ data:
           metadata_store:
             type: sqlite
             db_path: /tmp/llama-stack/files_metadata.db
-      prompts:
-      - provider_id: meta-reference
-        provider_type: inline::meta-reference
-        config:
-          kvstore:
-            type: sqlite
-            db_path: /tmp/llama-stack/prompts_kvstore.db
       safety:
       - provider_id: llama-guard
         provider_type: inline::llama-guard
