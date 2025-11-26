@@ -13,6 +13,7 @@ llamaguard:
   apiToken: ""
   tlsverify: true
 
-image: llamastack/distribution-remote-vllm:latest
-name: rh-dev
-namespace: lls-demo
+llamaStack:
+  image: llamastack/distribution-remote-vllm:latest
+  name: rh-dev
+  namespace: lls-demo
