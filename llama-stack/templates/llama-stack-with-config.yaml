@@ -34,7 +34,6 @@ spec:
         runAsUser: 1000
         fsGroup: 1000
     distribution:
-      image: '{{ .Values.llamaStack.image }}'
       name: '{{ .Values.llamaStack.name }}'
     userConfig:
       configMapName: llama-stack-config

@@ -14,6 +14,6 @@ llamaguard:
   tlsverify: true
 
 llamaStack:
-  image: llamastack/distribution-remote-vllm:latest
   name: rh-dev
-  namespace: lls-demo
+
+namespace: lls-demo
