@@ -13,7 +13,4 @@ llamaguard:
   apiToken: ""
   tlsverify: true
 
-llamaStack:
-  name: rh-dev
-
 namespace: lls-demo

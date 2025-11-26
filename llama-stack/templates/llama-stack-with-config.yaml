@@ -34,6 +34,6 @@ spec:
         runAsUser: 1000
         fsGroup: 1000
     distribution:
-      name: '{{ .Values.llamaStack.name }}'
+      image: docker.io/llamastack/distribution-remote-vllm:latest
     userConfig:
       configMapName: llama-stack-config
