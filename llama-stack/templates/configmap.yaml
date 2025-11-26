@@ -33,7 +33,7 @@ data:
         provider_type: remote::vllm
         config:
           url: ${env.SAFETY_MODEL:{{ .Values.llamaguard.endpoint }}}
-          max_tokens: ${env.VLLM_MAX_TOKENS: 4096}
+          max_tokens: ${env.VLLM_MAX_TOKENS:4096}
           api_token: ${env.VLLM_API_TOKEN:{{ .Values.llamaguard.apiToken }}}
           tls_verify: {{ .Values.llamaguard.tlsverify }}
       agents:
