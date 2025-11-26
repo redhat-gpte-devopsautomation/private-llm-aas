@@ -24,18 +24,18 @@ data:
       - provider_id: vllm
         provider_type: remote::vllm
         config:
-          url: ${env.GRANITE_URL:{{ .Values.granite.endpoint }}}
+          url: ${env.GRANITE_URL}
           tls_verify: {{ .Values.granite.tlsverify }}
-          api_token: ${env.GRANITE_TOKEN:{{ .Values.granite.apiToken }}}
+          api_token: ${env.GRANITE_TOKEN}
       - provider_id: sentence-transformers
         provider_type: inline::sentence-transformers
         config: {}
       - provider_id: vllm-safety
         provider_type: remote::vllm
         config:
-          url: ${env.SAFETY_MODEL:{{ .Values.llamaguard.endpoint }}}
+          url: ${env.SAFETY_MODEL}
           max_tokens: 4096
-          api_token: ${env.VLLM_API_TOKEN:{{ .Values.llamaguard.apiToken }}}
+          api_token: ${env.VLLM_API_TOKEN}
           tls_verify: {{ .Values.llamaguard.tlsverify }}
       agents:
       - provider_id: meta-reference
@@ -137,8 +137,8 @@ data:
       provider_id: sentence-transformers
       model_type: embedding
     - metadata: {}
-      model_id: "${env.SAFETY_MODEL:{{ .Values.llamaguard.modelName }}}"
-      provider_model_id: "${env.SAFETY_MODEL:{{ .Values.llamaguard.modelName }}}"
+      model_id: "{{ .Values.llamaguard.modelName }}"
+      provider_model_id: "{{ .Values.llamaguard.modelName }}"
       provider_id: vllm-safety
       model_type: llm
     datasets: []
@@ -146,7 +146,7 @@ data:
     scoring_fns: []
     benchmarks: []
     shields:
-    - shield_id: "${env.SAFETY_MODEL:{{ .Values.llamaguard.modelName }}}"
+    - shield_id: "{{ .Values.llamaguard.modelName }}"
     tool_groups:
     - provider_id: tavily-search
       toolgroup_id: builtin::websearch
