@@ -13,5 +13,5 @@ devworkspace:
   components:
     - name: tooling
       container:
-        image: registry.redhat.io/devspaces/ubi-rhel9:latest
+        image: registry.redhat.io/devspaces/udi-rhel9:3.21
         sourceMapping: /projects
