@@ -13,7 +13,7 @@ deployer:
 workspace:
   git:
     url: https://github.com/rhpds/private-llmaas-multitenant
-    revision: main
+    revision: multi-user-update
     path: workspace
   namespace: wksp
   devworkspace:
@@ -39,13 +39,13 @@ slackMcpSecret:
 
 llamaStack:
   repoURL: https://github.com/rhpds/private-llmaas-multitenant
-  targetRevision: main
+  targetRevision: multi-user-update
   path: llama-stack
   namespace: lls-demo
 
 llamaStackOperator:
   repoURL: https://github.com/rhpds/private-llmaas-multitenant
-  targetRevision: main
+  targetRevision: multi-user-update
   path: llama-stack-operator
   operator:
     image: quay.io/eformat/llama-stack-k8s-operator:v0.3.0
@@ -53,7 +53,7 @@ llamaStackOperator:
 
 llamaStackInstance:
   repoURL: https://github.com/rhpds/private-llmaas-multitenant
-  targetRevision: main
+  targetRevision: multi-user-update
   path: llama-stack-instance
   granite:
     modelName: granite-3dot2-8b-instruct

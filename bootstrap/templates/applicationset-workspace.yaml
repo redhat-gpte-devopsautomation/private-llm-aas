@@ -1,4 +1,3 @@
-{{ if .Values.workspace -}}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
@@ -33,4 +32,3 @@ spec:
         server: https://kubernetes.default.svc
       syncPolicy:
         automated: {}
-{{- end }}

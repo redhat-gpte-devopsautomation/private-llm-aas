@@ -1,4 +1,3 @@
-{{ if .Values.llamaStackInstance -}}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
@@ -45,4 +44,3 @@ spec:
         automated: {}
         syncOptions:
           - CreateNamespace=true
-{{- end }}
