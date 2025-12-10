@@ -3,19 +3,23 @@ kind: Deployment
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "4"
-  name: llama-stack-playground
+  name: llama-stack-playground-{{ .Values.username }}
+  namespace: lls-{{ .Values.username }}
   labels:
     app.kubernetes.io/name: llama-stack-playground
+    app.kubernetes.io/instance: {{ .Values.username }}
     app.kubernetes.io/version: "latest"
 spec:
   replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: llama-stack-playground
+      app.kubernetes.io/instance: {{ .Values.username }}
   template:
     metadata:
       labels:
         app.kubernetes.io/name: llama-stack-playground
+        app.kubernetes.io/instance: {{ .Values.username }}
     spec:
       securityContext:
         runAsNonRoot: true
@@ -42,7 +46,7 @@ spec:
             - name: STREAMLIT_SERVER_PORT
               value: "8501"
             - name: LLAMA_STACK_ENDPOINT
-              value: "http://llamastack-service:8321"
+              value: "http://llamastack-{{ .Values.username }}:8321"
             - name: DEFAULT_MODEL
               value: "{{ .Values.granite.modelName }}"
           livenessProbe:

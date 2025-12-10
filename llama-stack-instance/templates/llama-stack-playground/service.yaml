@@ -3,9 +3,11 @@ kind: Service
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "4"
-  name: llama-stack-playground
+  name: llama-stack-playground-{{ .Values.username }}
+  namespace: lls-{{ .Values.username }}
   labels:
     app.kubernetes.io/name: llama-stack-playground
+    app.kubernetes.io/instance: {{ .Values.username }}
     app.kubernetes.io/version: "latest"
 spec:
   type: ClusterIP
@@ -16,3 +18,4 @@ spec:
       name: http
   selector:
     app.kubernetes.io/name: llama-stack-playground
+    app.kubernetes.io/instance: {{ .Values.username }}

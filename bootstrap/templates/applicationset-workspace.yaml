@@ -26,6 +26,7 @@ spec:
         helm:
           values: |
             username: '{{ `{{ user }}` }}'
+            namespace: {{ .Values.workspace.namespace }}
             devworkspace:
               {{- toYaml .Values.workspace.devworkspace | nindent 14 }}
       destination:

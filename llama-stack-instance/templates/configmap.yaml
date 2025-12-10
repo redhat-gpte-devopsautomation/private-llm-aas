@@ -4,6 +4,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "3"
   name: llama-stack-config
+  namespace: lls-{{ .Values.username }}
 data:
   run.yaml: |
     version: '2'
@@ -22,21 +23,23 @@ data:
     providers:
       inference:
       - provider_id: vllm
-        provider_type: remote::vllm
+        provider_type: remote::openai
         config:
           url: ${env.GRANITE_URL}
-          tls_verify: {{ .Values.granite.tlsverify }}
           api_token: ${env.GRANITE_TOKEN}
+          default_headers:
+            api-key: ${env.GRANITE_TOKEN}
       - provider_id: sentence-transformers
         provider_type: inline::sentence-transformers
         config: {}
       - provider_id: vllm-safety
-        provider_type: remote::vllm
+        provider_type: remote::openai
         config:
           url: ${env.SAFETY_MODEL}
           max_tokens: 4096
           api_token: ${env.VLLM_API_TOKEN}
-          tls_verify: {{ .Values.llamaguard.tlsverify }}
+          default_headers:
+            api-key: ${env.VLLM_API_TOKEN}
       agents:
       - provider_id: meta-reference
         provider_type: inline::meta-reference
@@ -155,8 +158,8 @@ data:
     - toolgroup_id: mcp::openshift
       provider_id: model-context-protocol
       mcp_endpoint:
-        uri: http://ocp-mcp-server:8000/sse
+        uri: {{ .Values.mcp.openshiftServerUrl }}
     - toolgroup_id: mcp::slack
       provider_id: model-context-protocol
       mcp_endpoint:
-        uri: http://slack-mcp-server:80/sse
+        uri: {{ .Values.mcp.slackServerUrl }}

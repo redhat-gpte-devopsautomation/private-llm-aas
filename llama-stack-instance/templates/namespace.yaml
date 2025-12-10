@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  name: lls-{{ .Values.username }}
+  labels:
+    kubernetes.io/metadata.name: lls-{{ .Values.username }}
+    app.kubernetes.io/instance: llama-stack-{{ .Values.username }}
+    app.kubernetes.io/part-of: llama-stack

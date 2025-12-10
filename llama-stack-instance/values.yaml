@@ -1,0 +1,23 @@
+# Default values for llama-stack-instance
+# This is a YAML-formatted file.
+
+# Username for this instance (will be overridden by ApplicationSet)
+username: user1
+
+# Model configuration
+granite:
+  modelName: granite-3dot2-8b-instruct
+  endpoint: ""
+  apiToken: ""
+  tlsverify: true
+
+llamaguard:
+  modelName: llama-guard-3-1b
+  endpoint: ""
+  apiToken: ""
+  tlsverify: true
+
+# Shared MCP server configuration
+mcp:
+  openshiftServerUrl: http://ocp-mcp-server.lls-mcp.svc.cluster.local:8000/sse
+  slackServerUrl: http://slack-mcp-server.lls-mcp.svc.cluster.local:80/sse

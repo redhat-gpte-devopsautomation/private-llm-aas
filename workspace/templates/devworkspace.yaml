@@ -2,7 +2,7 @@
 apiVersion: workspace.devfile.io/v1alpha2
 kind: DevWorkspace
 metadata:
-  name: {{ .Values.devworkspace.name }}
+  name: {{ .Values.devworkspace.name | default (printf "llmaas-%s" .Values.username) }}
   namespace: {{ .Values.namespace }}-{{ .Values.username }}
 spec:
   routingClass: che
@@ -12,7 +12,7 @@ spec:
     uri: {{ .Values.devworkspace.devfile }}
   template:
     projects:
-    - name: {{ .Values.devworkspace.name }}
+    - name: {{ .Values.devworkspace.name | default "llmaas-workspace" }}
       git:
         remotes:
           origin: {{ .Values.devworkspace.projects.repoUrl }}

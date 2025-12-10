@@ -5,7 +5,8 @@ metadata:
     argocd.argoproj.io/sync-wave: "3"
     argocd.argoproj.io/compare-options: IgnoreExtraneous
     argocd.argoproj.io/sync-options: Prune=false
-  name: llamastack
+  name: llamastack-{{ .Values.username }}
+  namespace: lls-{{ .Values.username }}
 spec:
   replicas: 1
   server:
