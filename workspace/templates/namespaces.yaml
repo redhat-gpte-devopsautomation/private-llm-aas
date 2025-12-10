@@ -6,7 +6,9 @@ metadata:
   labels:
     app.kubernetes.io/part-of: che.eclipse.org
     app.kubernetes.io/component: workspaces-namespace
+    controller.devfile.io/namespace-owner: {{ .Values.username }}
   annotations:
     openshift.io/display-name: "Workspace {{ .Values.username }}"
     openshift.io/description: "Workspace Namespace"
     che.eclipse.org/username: {{ .Values.username }}
+    controller.devfile.io/namespace-owner: {{ .Values.username }}
