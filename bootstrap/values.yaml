@@ -15,7 +15,6 @@ workspace:
     url: https://github.com/rhpds/private-llmaas-multitenant
     revision: multi-user-update
     path: workspace
-  namespace: wksp
   devworkspace:
     # name will be auto-generated as llmaas-{username} if not specified
     devfile: http://devspaces-dashboard.openshift-devspaces.svc.cluster.local:8080/dashboard/api/editors/devfile?che-editor=che-incubator/che-code/latest

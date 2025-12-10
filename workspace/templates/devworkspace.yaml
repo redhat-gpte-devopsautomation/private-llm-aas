@@ -2,8 +2,8 @@
 apiVersion: workspace.devfile.io/v1alpha2
 kind: DevWorkspace
 metadata:
-  name: {{ .Values.devworkspace.name | default (printf "llmaas-%s" .Values.username) }}
-  namespace: {{ .Values.namespace }}-{{ .Values.username }}
+  name: llmaas-{{ .Values.username }}
+  namespace: devworkspaces
   annotations:
     controller.devfile.io/devworkspace-creator: {{ .Values.username }}
     che.eclipse.org/devworkspace-creator: {{ .Values.username }}
@@ -18,7 +18,7 @@ spec:
     uri: {{ .Values.devworkspace.devfile }}
   template:
     projects:
-    - name: {{ .Values.devworkspace.name | default "llmaas-workspace" }}
+    - name: llmaas-workspace
       git:
         remotes:
           origin: {{ .Values.devworkspace.projects.repoUrl }}
