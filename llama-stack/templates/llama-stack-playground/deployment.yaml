@@ -28,7 +28,7 @@ spec:
               - ALL
             readOnlyRootFilesystem: false
             runAsNonRoot: true
-          image: "quay.io/rh-aiservices-bu/llama-stack-playground:0.2.23"
+          image: "quay.io/rh-aiservices-bu/llama-stack-playground:latest"
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
