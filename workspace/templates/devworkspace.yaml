@@ -6,9 +6,12 @@ metadata:
   namespace: devworkspaces-{{ .Values.username }}
   annotations:
     argocd.argoproj.io/sync-wave: "1"
+    controller.devfile.io/devworkspace-creator: {{ .Values.username }}
+    che.eclipse.org/devworkspace-creator: {{ .Values.username }}
   labels:
     app.kubernetes.io/part-of: che.eclipse.org
     app.kubernetes.io/component: workspace
+    controller.devfile.io/creator: ""
 spec:
   routingClass: che
   started: true
