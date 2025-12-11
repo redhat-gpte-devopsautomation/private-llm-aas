@@ -1,0 +1,147 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: workspace-provisioner
+  namespace: devworkspaces-{{ .Values.username }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: workspace-impersonator-{{ .Values.username }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+rules:
+- apiGroups: [""]
+  resources: ["users"]
+  verbs: ["impersonate"]
+  resourceNames: ["{{ .Values.username }}"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: workspace-provisioner-edit
+  namespace: devworkspaces-{{ .Values.username }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: edit
+subjects:
+- kind: ServiceAccount
+  name: workspace-provisioner
+  namespace: devworkspaces-{{ .Values.username }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: workspace-provisioner-{{ .Values.username }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: workspace-impersonator-{{ .Values.username }}
+subjects:
+- kind: ServiceAccount
+  name: workspace-provisioner
+  namespace: devworkspaces-{{ .Values.username }}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: provision-workspace-{{ .Values.username }}
+  namespace: devworkspaces-{{ .Values.username }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+spec:
+  ttlSecondsAfterFinished: 600
+  backoffLimit: 5
+  template:
+    metadata:
+      name: provision-workspace
+    spec:
+      serviceAccountName: workspace-provisioner
+      restartPolicy: OnFailure
+      containers:
+      - name: provision
+        image: registry.redhat.io/openshift4/ose-cli:latest
+        command:
+        - /bin/bash
+        - -xc
+        - |
+          set -e
+
+          USERNAME="{{ .Values.username }}"
+          NAMESPACE="devworkspaces-${USERNAME}"
+          WORKSPACE_NAME="llmaas-${USERNAME}"
+
+          echo "=== Provisioning workspace for ${USERNAME} ==="
+
+          # Check if workspace already exists with correct creator
+          if oc get devworkspace "${WORKSPACE_NAME}" -n "${NAMESPACE}" 2>/dev/null; then
+            CREATOR=$(oc get devworkspace "${WORKSPACE_NAME}" -n "${NAMESPACE}" -o jsonpath='{.metadata.labels.controller\.devfile\.io/creator}' || echo "")
+
+            # If creator looks like a UUID (GitOps-created with SA), delete and recreate
+            # If creator is empty or username, keep it
+            if [[ "$CREATOR" =~ ^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$ ]]; then
+              echo "Workspace exists with GitOps UUID creator (${CREATOR}), deleting..."
+              oc delete devworkspace "${WORKSPACE_NAME}" -n "${NAMESPACE}" --wait=true --timeout=120s
+              sleep 5
+            else
+              echo "Workspace exists with acceptable creator: ${CREATOR}"
+              exit 0
+            fi
+          fi
+
+          echo "Creating DevWorkspace as user ${USERNAME}..."
+
+          # Create workspace while impersonating the user
+          cat <<EOF | oc create --as="${USERNAME}" -f -
+          apiVersion: workspace.devfile.io/v1alpha2
+          kind: DevWorkspace
+          metadata:
+            name: ${WORKSPACE_NAME}
+            namespace: ${NAMESPACE}
+            labels:
+              app.kubernetes.io/part-of: che.eclipse.org
+              app.kubernetes.io/component: workspace
+          spec:
+            routingClass: che
+            started: false
+            contributions:
+            - name: ide
+              uri: {{ .Values.devworkspace.devfile }}
+            template:
+              projects:
+              - name: llmaas-workspace
+                git:
+                  remotes:
+                    origin: {{ .Values.devworkspace.projects.repoUrl }}
+                  checkoutFrom:
+                    revision: {{ .Values.devworkspace.projects.revision }}
+              components:
+          {{- toYaml .Values.devworkspace.components | nindent 14 }}
+          EOF
+
+          echo "=== Waiting for workspace to be ready ==="
+          for i in {1..60}; do
+            PHASE=$(oc get devworkspace "${WORKSPACE_NAME}" -n "${NAMESPACE}" -o jsonpath='{.status.phase}' 2>/dev/null || echo "")
+            if [[ "$PHASE" == "Running" ]] || [[ "$PHASE" == "Stopped" ]]; then
+              echo "Workspace is ${PHASE}"
+              break
+            fi
+            echo "Waiting... (${i}/60) Phase: ${PHASE}"
+            sleep 5
+          done
+
+          # Get and display the workspace details
+          echo "=== Workspace Details ==="
+          oc get devworkspace "${WORKSPACE_NAME}" -n "${NAMESPACE}" -o jsonpath='Creator: {.metadata.labels.controller\.devfile\.io/creator}{"\n"}URL: {.status.mainUrl}{"\n"}'
+
+          echo "=== Workspace provisioned successfully for ${USERNAME} ==="
