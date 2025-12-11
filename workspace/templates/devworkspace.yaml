@@ -3,10 +3,9 @@ apiVersion: workspace.devfile.io/v1alpha2
 kind: DevWorkspace
 metadata:
   name: llmaas-{{ .Values.username }}
-  namespace: devworkspaces
+  namespace: devworkspaces-{{ .Values.username }}
   annotations:
-    controller.devfile.io/devworkspace-creator: {{ .Values.username }}
-    che.eclipse.org/devworkspace-creator: {{ .Values.username }}
+    argocd.argoproj.io/sync-wave: "1"
   labels:
     app.kubernetes.io/part-of: che.eclipse.org
     app.kubernetes.io/component: workspace
