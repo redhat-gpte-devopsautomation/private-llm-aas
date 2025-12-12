@@ -133,6 +133,12 @@ spec:
           {{- toYaml .Values.devworkspace.components | nindent 14 }}
           EOF
 
+          echo "=== Patching creator label to ${USERNAME} ==="
+          # Patch the creator label since the webhook sets it to ServiceAccount UUID
+          oc patch devworkspace "${WORKSPACE_NAME}" -n "${NAMESPACE}" \
+            --type=json \
+            -p='[{"op": "replace", "path": "/metadata/labels/controller.devfile.io~1creator", "value": "'${USERNAME}'"}]'
+
           echo "=== Waiting for workspace to be ready ==="
           for i in {1..60}; do
             PHASE=$(oc get devworkspace "${WORKSPACE_NAME}" -n "${NAMESPACE}" -o jsonpath='{.status.phase}' 2>/dev/null || echo "")
