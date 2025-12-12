@@ -1,4 +1,4 @@
-{{- if and .Values.workspace .Values.workspace.git }}
+{{ if .Values.workspace -}}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
@@ -25,7 +25,7 @@ spec:
         path: {{ .Values.workspace.git.path }}
         helm:
           values: |
-            username: '{{ `{{ user }}` }}'
+            username: '{{- "{{" }} user {{- " }}" }}'
             devworkspace:
               {{- toYaml .Values.workspace.devworkspace | nindent 14 }}
       destination:
