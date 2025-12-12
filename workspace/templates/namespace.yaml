@@ -1,18 +1,12 @@
 ---
-# Use DevSpaces auto-provisioned namespace pattern: <username>-devspaces
-# We just ensure the RoleBinding exists for the user
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
+apiVersion: v1
+kind: Namespace
 metadata:
-  name: {{ .Values.username }}-admin
-  namespace: {{ .Values.username }}-devspaces
+  name: {{ .Values.namespace }}-{{ .Values.username }}
+  labels:
+    app.kubernetes.io/part-of: che.eclipse.org
+    app.kubernetes.io/component: workspaces-namespace
   annotations:
-    argocd.argoproj.io/sync-wave: "0"
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: admin
-subjects:
-- apiGroup: rbac.authorization.k8s.io
-  kind: User
-  name: {{ .Values.username }}
+    openshift.io/display-name: "Workspace {{ .Values.username }}"
+    openshift.io/description: "Workspace Namespace"
+    che.eclipse.org/username: {{ .Values.username }}

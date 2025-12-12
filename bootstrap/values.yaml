@@ -10,22 +10,22 @@ deployer:
   domain: apps.cluster-guid.sandbox.opentlc.com
   apiUrl: https://api.cluster-guid.sandbox.opentlc.com:6443
 
-  workspace:
-    git:
-      url: https://github.com/rhpds/private-llmaas-multitenant
-      revision: multi-user-update
-      path: workspace
-    devworkspace:
-      # name will be auto-generated as llmaas-{username} if not specified
-      devfile: http://devspaces-dashboard.openshift-devspaces.svc.cluster.local:8080/dashboard/api/editors/devfile?che-editor=che-incubator/che-code/latest
-      projects:
-        repoUrl: https://github.com/taylorjordanNC/coding-exercises
-        revision: main
-      components:
-        - name: tooling
-          container:
-            image: registry.redhat.io/devspaces/udi-rhel9:3.21
-            sourceMapping: /projects
+workspace:
+  git:
+    url: https://github.com/rhpds/private-llmaas-multitenant
+    revision: multi-user-update
+    path: workspace
+  devworkspace:
+    # name will be auto-generated as llmaas-{username} if not specified
+    devfile: http://devspaces-dashboard.openshift-devspaces.svc.cluster.local:8080/dashboard/api/editors/devfile?che-editor=che-incubator/che-code/latest
+    projects:
+      repoUrl: https://github.com/taylorjordanNC/coding-exercises
+      revision: main
+    components:
+      - name: tooling
+        container:
+          image: registry.redhat.io/devspaces/udi-rhel9:3.21
+          sourceMapping: /projects
 
 slackMcpSecret:
   namespace: lls-demo

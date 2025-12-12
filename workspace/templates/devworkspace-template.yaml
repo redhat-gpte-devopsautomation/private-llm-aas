@@ -1,21 +1,22 @@
 ---
 apiVersion: workspace.devfile.io/v1alpha2
-kind: DevWorkspaceTemplate
+kind: DevWorkspace
 metadata:
-  name: llmaas-workspace-template
-  namespace: {{ .Values.username }}-devspaces
-  annotations:
-    argocd.argoproj.io/sync-wave: "1"
-    che.eclipse.org/devfile-name: "LLMaaS Workspace"
-    che.eclipse.org/devfile-description: "Multi-tenant LLMaaS development workspace"
-    che.eclipse.org/devfile-icon: "https://raw.githubusercontent.com/devfile/registry/main/stacks/python/icon/python.svg"
+  name: {{ .Values.devworkspace.name }}
+  namespace: {{ .Values.namespace }}-{{ .Values.username }}
 spec:
-  projects:
-  - name: llmaas-workspace
-    git:
-      remotes:
-        origin: {{ .Values.devworkspace.projects.repoUrl }}
-      checkoutFrom:
-        revision: {{ .Values.devworkspace.projects.revision }}
-  components:
-{{- toYaml .Values.devworkspace.components | nindent 2 }}
+  routingClass: che
+  started: true
+  contributions:
+  - name: ide
+    uri: {{ .Values.devworkspace.devfile }}
+  template:
+    projects:
+    - name: {{ .Values.devworkspace.name }}
+      git:
+        remotes:
+          origin: {{ .Values.devworkspace.projects.repoUrl }}
+        checkoutFrom:
+          revision: {{ .Values.devworkspace.projects.revision }}
+    components:
+    {{- toYaml .Values.devworkspace.components | nindent 4 }}
