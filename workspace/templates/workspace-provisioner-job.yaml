@@ -62,6 +62,7 @@ metadata:
   namespace: devworkspaces-{{ .Values.username }}
   annotations:
     argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/sync-options: Replace=true
 spec:
   ttlSecondsAfterFinished: 600
   backoffLimit: 5
