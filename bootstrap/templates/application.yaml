@@ -7,9 +7,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/rhpds/private-llmaas-multitenant
-    targetRevision: taylor-testing
-    path: applications
+    repoURL: {{ .Values.bootstrap.repoURL }}
+    targetRevision: {{ .Values.bootstrap.targetRevision }}
+    path: {{ .Values.bootstrap.path }}
   destination:
     namespace: openshift-gitops
     server: https://kubernetes.default.svc
@@ -25,3 +25,4 @@ spec:
       jsonPointers:
         - /spec/syncPolicy/automated
         - /spec/syncPolicy/ignoreDifferences
+
