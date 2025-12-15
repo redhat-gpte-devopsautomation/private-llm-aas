@@ -6,4 +6,5 @@ metadata:
     argocd.argoproj.io/sync-wave: "-1"
   labels:
     component: llama-stack
-  name: {{ .Values.namespace }}
+  name: lls-demo
+

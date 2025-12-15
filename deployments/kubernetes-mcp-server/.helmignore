@@ -21,7 +21,3 @@
 .idea/
 *.tmproj
 .vscode/
-# Old Kustomize files
-kustomization.yaml
-openshift-*.yaml
-mcp-containerfile/

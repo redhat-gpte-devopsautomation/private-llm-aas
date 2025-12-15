@@ -9,10 +9,7 @@ spec:
   source:
     repoURL: https://github.com/rhpds/private-llmaas-multitenant
     targetRevision: taylor-testing
-    path: llama-stack
-    helm:
-      values: |
-        namespace: lls-demo
+    path: deployments/llama-stack
   destination:
     server: https://kubernetes.default.svc
     namespace: lls-demo
