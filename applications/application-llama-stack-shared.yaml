@@ -7,15 +7,15 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: {{ .Values.llamaStack.repoURL }}
-    targetRevision: {{ .Values.llamaStack.targetRevision }}
-    path: {{ .Values.llamaStack.path }}
+    repoURL: https://github.com/rhpds/private-llmaas-multitenant
+    targetRevision: taylor-testing
+    path: llama-stack
     helm:
       values: |
-        namespace: {{ .Values.llamaStack.namespace }}
+        namespace: lls-demo
   destination:
     server: https://kubernetes.default.svc
-    namespace: {{ .Values.llamaStack.namespace }}
+    namespace: lls-demo
   syncPolicy:
     automated: {}
     syncOptions:

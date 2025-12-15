@@ -1,0 +1,27 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bootstrap
+  namespace: openshift-gitops
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/rhpds/private-llmaas-multitenant
+    targetRevision: taylor-testing
+    path: applications
+  destination:
+    namespace: openshift-gitops
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - RespectIgnoreDifferences=true
+  ignoreDifferences:
+    - group: argoproj.io
+      kind: Application
+      jsonPointers:
+        - /spec/syncPolicy/automated
+        - /spec/syncPolicy/ignoreDifferences
