@@ -19,7 +19,7 @@ workspace:
   git:
     url: https://github.com/rhpds/private-llmaas-multitenant
     revision: taylor-testing
-    path: workspace
+    path: deployments/workspace
   devworkspace:
     # name will be auto-generated as llmaas-{username} if not specified
     devfile: http://devspaces-dashboard.openshift-devspaces.svc.cluster.local:8080/dashboard/api/editors/devfile?che-editor=che-incubator/che-code/latest
@@ -45,7 +45,7 @@ slackMcpSecret:
 llamaStackInstance:
   repoURL: https://github.com/rhpds/private-llmaas-multitenant
   targetRevision: taylor-testing
-  path: llama-stack-instance
+  path: deployments/llama-stack-instance
   granite:
     modelName: granite-3dot2-8b-instruct
     endpoint: "http://maas.apps.ocp.w2mmc.sandbox5295.opentlc.com/llm/granite-3dot2-8b-instruct"
