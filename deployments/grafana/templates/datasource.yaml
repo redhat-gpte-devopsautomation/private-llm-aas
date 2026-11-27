@@ -26,5 +26,9 @@ spec:
     secureJsonData:
       httpHeaderValue1: Bearer ${token}
     name: Prometheus
+    # Fixed uid so dashboards can reference this datasource directly.
+    # Dashboards applied via GrafanaDashboard CRs get no import step, so the
+    # ${DS_PROMETHEUS}/__inputs pattern never resolves and panels stay empty.
+    uid: prometheus
     type: prometheus
     url: https://thanos-querier.openshift-monitoring.svc:9091
